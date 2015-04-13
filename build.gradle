@@ -27,7 +27,7 @@ war {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.12'
+    gradleVersion = '2.3'
 }
 
 repositories {
@@ -64,14 +64,23 @@ dependencies {
     compile ("com.mozu:mozu-api-logger:1.0.0")
     
     compile ("com.mozu:mozu-api-toolkit:1.0.18") {
-    	 exclude group: 'mysql'
+    	exclude group: 'mysql'
         exclude group: 'xerces'
         exclude group: 'berkeleydb'
         exclude group: 'hsqldb'
         exclude group: 'tomcat'
         
+        // old out-of-date JCS deps
+        exclude group: 'javax.sql'
+        exclude group: 'javax.transaction'
+        exclude group: 'servletapi'
+        
         changing = true
     }
+    
+    // JCS requests version 1.0.1B, for which Jar is not present in central
+    // override with 1.1
+    compile 'javax.transaction:jta:1.1'
     
 	compile ("org.slf4j:slf4j-api:1.7.5")
 	compile ("org.slf4j:slf4j-log4j12:1.7.5")
@@ -100,5 +109,3 @@ uploadArchives {
        }
     }
 }
-
-
