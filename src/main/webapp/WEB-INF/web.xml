@@ -8,6 +8,13 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/root-context.xml</param-value>
 	</context-param>
+
+	<!-- When Log4jConfigListener was trying to set the web app root in a non-expanded WAR file
+	it was failing.  I found this property in Log4jWebConfigurer (the default was true) -->
+	<context-param>
+		<param-name>log4jExposeWebAppRoot</param-name>
+		<param-value>false</param-value>
+	</context-param>
 	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
